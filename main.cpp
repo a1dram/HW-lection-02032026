@@ -137,3 +137,28 @@ void BiLoopList< T >::push_back(const T& x)
   head->prev = node;
   tail = node;
 }
+
+template< class T >
+void BiLoopList< T >::pop_front()
+{
+  if (empty()) {
+    return;
+  }
+
+  if (head == tail)
+  {
+    delete head;
+    head = nullptr;
+    tail = nullptr;
+    return;
+  }
+
+  BiList< T >* old = head;
+  BiList< T >* nh = head->next;
+
+  tail->next = nh;
+  nh->prev = tail;
+  head = nh;
+
+  delete old;
+}
