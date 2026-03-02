@@ -162,3 +162,28 @@ void BiLoopList< T >::pop_front()
 
   delete old;
 }
+
+template< class T >
+void BiLoopList< T >::pop_back()
+{
+  if (empty()) {
+    return;
+  }
+
+  if (head == tail)
+  {
+    delete tail;
+    head = nullptr;
+    tail = nullptr;
+    return;
+  }
+
+  BiList< T >* old = tail;
+  BiList< T >* nt = tail->prev;
+
+  nt->next = head;
+  head->prev = nt;
+  tail = nt;
+
+  delete old;
+}
