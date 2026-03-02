@@ -93,3 +93,25 @@ const T* BiLoopList< T >::back() const
 {
   return tail ? &tail->val : nullptr;
 }
+
+template< class T >
+void BiLoopList< T >::push_front(const T& x)
+{
+  BiList< T >* node = new BiList< T >{x, nullptr, nullptr};
+
+  if (empty())
+  {
+    node->next = node;
+    node->prev = node;
+    head = node;
+    tail = node;
+    return;
+  }
+
+  node->next = head;
+  node->prev = tail;
+
+  head->prev = node;
+  tail->next = node;
+  head = node;
+}
