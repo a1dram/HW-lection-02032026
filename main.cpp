@@ -45,3 +45,9 @@ BiLoopList< T >::~BiLoopList()
 {
   clear();
 }
+
+template< class T >
+bool BiLoopList< T >::empty() const
+{
+  return head == nullptr;
+}
