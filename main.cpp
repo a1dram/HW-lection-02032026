@@ -69,3 +69,27 @@ size_t BiLoopList< T >::size() const
 
   return n;
 }
+
+template< class T >
+T* BiLoopList< T >::front()
+{
+  return head ? &head->val : nullptr;
+}
+
+template< class T >
+const T* BiLoopList< T >::front() const
+{
+  return head ? &head->val : nullptr;
+}
+
+template< class T >
+T* BiLoopList< T >::back()
+{
+  return tail ? &tail->val : nullptr;
+}
+
+template< class T >
+const T* BiLoopList< T >::back() const
+{
+  return tail ? &tail->val : nullptr;
+}
