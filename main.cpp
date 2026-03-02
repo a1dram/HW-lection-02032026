@@ -204,3 +204,35 @@ void BiLoopList< T >::convert_to_list(const T* a, size_t n)
     push_back(a[i]);
   }
 }
+
+int main()
+{
+  char a[] = { 'A', 'B', 'C', 'D', 'E', 'F'};
+  size_t n = sizeof(a) / sizeof(a[0]);
+
+  BiLoopList< char > lst;
+  lst.convert_to_list(a, n);
+
+  if (!lst.empty())
+  {
+    BiList< char >* p = lst.head;
+    for (size_t i = 0; i < n; ++i)
+    {
+      std::cout << p->val << (i + 1 == n ? '\n' : ' ');
+      p = p->next;
+    }
+  }
+
+  if (!lst.empty())
+  {
+    BiList< char >* p = lst.tail;
+    for (size_t i = 0; i < n; ++i)
+    {
+      std::cout << p->val << (i + 1 == n ? '\n' : ' ');
+      p = p->prev;
+    }
+  }
+
+  lst.clear();
+  return 0;
+}
