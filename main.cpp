@@ -51,3 +51,21 @@ bool BiLoopList< T >::empty() const
 {
   return head == nullptr;
 }
+
+template< class T >
+size_t BiLoopList< T >::size() const
+{
+  if (empty()) {
+    return 0;
+  }
+
+  size_t n = 0;
+  BiList< T >* p = head;
+  while (p != head)
+  {
+    ++n;
+    p = p->next;
+  }
+
+  return n;
+}
