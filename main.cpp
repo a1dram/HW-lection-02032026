@@ -187,3 +187,20 @@ void BiLoopList< T >::pop_back()
 
   delete old;
 }
+
+template< class T >
+void BiLoopList< T >::clear()
+{
+  while (!empty()) {
+    pop_front();
+  }
+}
+
+template< class T >
+void BiLoopList< T >::convert_to_list(const T* a, size_t n)
+{
+  clear();
+  for (size_t i = 0; i < n; ++i) {
+    push_back(a[i]);
+  }
+}
