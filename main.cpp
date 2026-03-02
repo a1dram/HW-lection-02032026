@@ -49,7 +49,7 @@ BiLoopList< T >::~BiLoopList()
 template< class T >
 bool BiLoopList< T >::empty() const
 {
-  return head == nullptr;
+  return head == nullptr; // T::operator==()
 }
 
 template< class T >
@@ -60,11 +60,11 @@ size_t BiLoopList< T >::size() const
   }
 
   size_t n = 0;
-  BiList< T >* p = head;
-  while (p != head)
+  BiList< T >* p = head; // T::operator=()
+  while (p != head) // T::operator!=()
   {
     ++n;
-    p = p->next;
+    p = p->next; // T::operator=()
   }
 
   return n;
@@ -97,10 +97,11 @@ const T* BiLoopList< T >::back() const
 template< class T >
 void BiLoopList< T >::push_front(const T& x)
 {
-  BiList< T >* node = new BiList< T >{x, nullptr, nullptr};
+  BiList< T >* node = new BiList< T >{x, nullptr, nullptr}; // T::T()
 
   if (empty())
   {
+    // тут везде T::operator=()
     node->next = node;
     node->prev = node;
     head = node;
@@ -108,6 +109,7 @@ void BiLoopList< T >::push_front(const T& x)
     return;
   }
 
+  // тут везде T::operator=()
   node->next = head;
   node->prev = tail;
 
@@ -119,10 +121,11 @@ void BiLoopList< T >::push_front(const T& x)
 template< class T >
 void BiLoopList< T >::push_back(const T& x)
 {
-  BiList< T >* node = new BiList< T >{x, nullptr, nullptr};
+  BiList< T >* node = new BiList< T >{x, nullptr, nullptr}; // T::T()
 
   if (empty())
   {
+    // тут везде T::operator=()
     node->next = node;
     node->prev = node;
     head = node;
@@ -130,6 +133,7 @@ void BiLoopList< T >::push_back(const T& x)
     return;
   }
 
+  // тут везде T::operator=()
   node->prev = tail;
   node->next = head;
 
@@ -145,7 +149,7 @@ void BiLoopList< T >::pop_front()
     return;
   }
 
-  if (head == tail)
+  if (head == tail) // T::operator==()
   {
     delete head;
     head = nullptr;
@@ -153,7 +157,7 @@ void BiLoopList< T >::pop_front()
     return;
   }
 
-  BiList< T >* old = head;
+  BiList< T >* old = head; // T::operator=()
   BiList< T >* nh = head->next;
 
   tail->next = nh;
@@ -170,7 +174,7 @@ void BiLoopList< T >::pop_back()
     return;
   }
 
-  if (head == tail)
+  if (head == tail) // T::operator==()
   {
     delete tail;
     head = nullptr;
@@ -178,10 +182,10 @@ void BiLoopList< T >::pop_back()
     return;
   }
 
-  BiList< T >* old = tail;
+  BiList< T >* old = tail; // T::operator=()
   BiList< T >* nt = tail->prev;
 
-  nt->next = head;
+  nt->next = head; // T::operator=()
   head->prev = nt;
   tail = nt;
 
