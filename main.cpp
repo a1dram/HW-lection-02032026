@@ -79,3 +79,23 @@ BiList< T >* cut(BiList< T >* h) noexcept
   delete h;
   return nh;
 }
+
+template< class T >
+BiList< T >* erase(BiList< T >* h) noexcept
+{
+  if (h == nullptr)
+    return nullptr;
+
+  if (h->next == h)
+    return h;
+
+  BiList< T >* del = h->next;
+  BiList< T >* after = del->next;
+
+  h->next = after;
+  after->prev = h;
+
+  // деструктор T::~T()
+  delete del;
+  return h;
+}
