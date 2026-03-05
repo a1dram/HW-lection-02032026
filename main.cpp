@@ -55,3 +55,27 @@ BiList< T >* insert(BiList< T >* h, const T& d)
 
   return node;
 }
+
+template< class T >
+BiList< T >* cut(BiList< T >* h) noexcept
+{
+  if (h == nullptr)
+    return nullptr;
+
+  if (h->next == h)
+  {
+    // деструктор T::~T()
+    delete h;
+    return nullptr;
+  }
+
+  BiList< T >* tail = h->prev;
+  BiList< T >* nh = h->next;
+
+  tail->next = nh;
+  nh->prev = tail;
+
+  // деструктор T::~T()
+  delete h;
+  return nh;
+}
