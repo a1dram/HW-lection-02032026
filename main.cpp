@@ -99,3 +99,28 @@ BiList< T >* erase(BiList< T >* h) noexcept
   delete del;
   return h;
 }
+
+template< class T >
+BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept
+{
+  if (h == nullptr)
+    return e;
+
+  if (e == nullptr)
+  {
+    BiList< T >* tail = h->prev;
+    tail->next = nullptr;
+    h->prev = nullptr;
+  }
+
+  while (h != e)
+  {
+    BiList< T >* old = h;
+    h = h->next;
+
+    // деструктор T::~T()
+    delete old;
+  }
+
+  return e;
+}
