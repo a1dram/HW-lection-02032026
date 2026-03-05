@@ -124,3 +124,44 @@ BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept
 
   return e;
 }
+
+int main()
+{
+  char a[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+  size_t n = sizeof(a) / sizeof(a[0]);
+
+  BiList< char >* head = nullptr;
+
+  for (size_t i = 0; i < n; ++i)
+  {
+    if (head == nullptr)
+      head = add(head, a[i]);
+    else
+    {
+      BiList< char >* tail = head->prev;
+      insert(tail, a[i]);
+    }
+  }
+
+  if (head != nullptr)
+  {
+    BiList< char >* p = head;
+    for (size_t i = 0; i < n; ++i)
+    {
+      // operator<<(std::ostream&, const T&)
+      std::cout << p->val << (i + 1 == n ? '\n' : ' ');
+      p = p->next;
+    }
+
+    p = head->prev;
+    for (size_t i = 0; i < n; ++i)
+    {
+      // operator<<(std::ostream&, const T&)
+      std::cout << p->val << (i + 1 == n ? '\n' : ' ');
+      p = p->prev;
+    }
+  }
+
+  head = clear<char>(head, nullptr);
+  return 0;
+}
